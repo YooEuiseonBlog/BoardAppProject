@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.prototype.portfolio.dao.MemberDao">
+<select id="findByIdAndPwd" parameterType="MemberVo" resultType="MemberVo">
+	select userid from user_info where userid = #{userid}
+</select>
+
+<sql id="sqlElements">
+	userid, userpwd, username, email, phone_num, user_addr, nickname, update_date, reg_date
+</sql>
+<insert id="addMember">
+	insert into user_info(userid, userpwd, username, email, phone_num, user_addr, nickname) values(#{userid}, #{userpwd}, #{username}, #{email}, #{phone_num}, #{user_addr}, #{nickname})
+</insert>
+
+<select id="findMemberList" resultType="MemberVo">
+	select
+	<include refid="sqlElements"></include>
+	from user_info
+</select>
+</mapper>
