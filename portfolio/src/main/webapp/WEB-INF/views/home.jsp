@@ -8,9 +8,28 @@
 <meta charset="UTF-8">
 <title>Welcome Page</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(function(){
+		$('#login-btn').on("click", function(){
+			location.href="/login";
+		});
+		
+		$('#logout-btn').on("click", function(){
+			location.href="/logout";
+		});
+		
+		$('#edit-btn').on("click", function(){
+			location.href="/edit";
+		});
+	})
+</script>
 </head>
 <body>
 	<p>Welcome Page</p>
-	<a href="/login">로그인</a>
+	<p>${sessionId }</p>
+	<button type="button" id="${!empty sessionId? 'logout-btn' : 'login-btn' }">${!empty sessionId? "로그아웃":"로그인"  }</button>
+	<c:if test="${!empty sessionId }">
+		<button type="button" id="edit-btn">회원수정</button>
+	</c:if>
 </body>
 </html>

@@ -86,9 +86,22 @@ public class MemberController {
 		System.out.println("------------------------- List Start -------------------------");
 		return "members/memberList";
 	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		System.out.println("------------------------- Session Stop -------------------------");
+		return "redirect:/";
+	}
 	
-	@GetMapping("/update")
-	public String moveToUpdateView() {
-		return "members/update";
+	
+	@GetMapping("/edit")
+	public String moveToUpdateView(Model model, HttpSession session) {
+		Object sessionId = session.getAttribute("sessionId");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sessionId", sessionId);
+		MemberVo member = service.inquireOne(map);
+		System.out.println("member=" + member);
+		model.addAttribute("member", member);		
+		return "members/join";
 	}
 }

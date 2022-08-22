@@ -3,6 +3,7 @@ package com.prototype.portfolio.service;
 
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -36,6 +37,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<MemberVo> inquireAll() {
 		return dao.findMemberList();
+	}
+
+	@Override
+	public MemberVo inquireOne(Map<String, Object> map) {
+		return dao.findById(map);
 	}
 
 }

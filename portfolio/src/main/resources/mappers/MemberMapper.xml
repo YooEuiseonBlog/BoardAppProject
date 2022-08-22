@@ -5,7 +5,7 @@
 
 <mapper namespace="com.prototype.portfolio.dao.MemberDao">
 <select id="findByIdAndPwd" parameterType="MemberVo" resultType="MemberVo">
-	select userid from user_info where userid = #{userid}
+	select userid, userpwd, nickname from user_info where userid = #{userid} and userpwd = #{userpwd}
 </select>
 
 <sql id="sqlElements">
@@ -19,5 +19,13 @@
 	select
 	<include refid="sqlElements"></include>
 	from user_info
+</select>
+
+<select id="findById" resultType="MemberVo">
+	select
+	<include refid="sqlElements"></include>
+	from user_info
+	where userid=#{sessionId}
+	
 </select>
 </mapper>
