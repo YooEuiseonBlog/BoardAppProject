@@ -26,6 +26,13 @@
 	<include refid="sqlElements"></include>
 	from user_info
 	where userid=#{sessionId}
-	
 </select>
+
+<update id="updateMember">
+	update user_info set userpwd= #{userpwd}, username=#{username}, phone_num=#{phone_num}, user_addr=#{user_addr}, nickname=#{nickname}, update_date=now() where userid=#{userid}
+</update>
+
+<delete id="deleteMember">
+	delete from user_info where userid=#{sessionId}	
+</delete>
 </mapper>

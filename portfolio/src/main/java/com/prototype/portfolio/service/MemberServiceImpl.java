@@ -16,13 +16,13 @@ import com.prototype.portfolio.vo.MemberVo;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	@Inject
-	MemberDao dao;
 	
-//	public MemberServiceImpl(MemberDao dao) {
-//		super();
-//		this.dao = dao;
-//	}
+	private final MemberDao dao;
+	
+	public MemberServiceImpl(MemberDao dao) {
+		super();
+		this.dao = dao;
+	}
 
 	@Override
 	public int join(MemberVo member) {
@@ -42,6 +42,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVo inquireOne(Map<String, Object> map) {
 		return dao.findById(map);
+	}
+
+	@Override
+	public int edit(MemberVo member) {
+		return dao.updateMember(member);
+	}
+
+	@Override
+	public int remove(Map<String, String> map) {
+		return dao.deleteMember(map);
 	}
 
 }

@@ -16,4 +16,6 @@ public interface MemberDao {
 	public MemberVo findById(Map<String, Object> map);
 	public int addMember(MemberVo member);
 	public List<MemberVo> findMemberList();
+	public int updateMember(MemberVo member);
+	public int deleteMember(Map<String, String> map);
 }

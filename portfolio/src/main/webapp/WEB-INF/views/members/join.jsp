@@ -20,7 +20,7 @@
 		<label for="userpwd">비밀번호: </label>
 		<input type="password" id="userpwd" name="userpwd" placeholder="비밀번호를 입력해주세요." value="${member.userpwd }"/><br/>
 		<label for="username">이름: </label>
-		<input type="text" id="username" name="username" placeholder="이름을 입력해주세요." value="${member.username }" ${checkReadOnly }/><br/>
+		<input type="text" id="username" name="username" placeholder="이름을 입력해주세요." value="${member.username }"/><br/>
 		<label for="nickname">닉네임: </label>
 		<input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요." value="${member.nickname }"/><br/>
 		<label for="phone_num1">전화번호: </label>

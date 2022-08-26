@@ -5,29 +5,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.prototype.portfolio.service.MemberService;
 import com.prototype.portfolio.vo.MemberVo;
 
 @Controller
 public class MemberController {
-	@Inject
-	MemberService service;
+
+	private final MemberService service;
 	
-//	public MemberController(MemberService service) {
-//		super();
-//		this.service = service;
-//	}
-//	
+	public MemberController(MemberService service) {
+		super();
+		this.service = service;
+	}
+	
 	@GetMapping("/login")
 	public String moveToLoginView() {
 		return "members/login";
@@ -100,8 +103,38 @@ public class MemberController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sessionId", sessionId);
 		MemberVo member = service.inquireOne(map);
-		System.out.println("member=" + member);
+		System.out.println("member = " + member);
 		model.addAttribute("member", member);		
 		return "members/join";
+	}
+	
+	@PostMapping("/edit")
+	public String update(MemberVo member) {
+		System.out.println("memberVo member = " + member);
+		int cnt = service.edit(member);
+		System.out.println("cnt =" + cnt);
+		if(cnt!=1) {
+			return "redirect:/edit";
+		}
+		return "redirect:/";
+	}
+	
+	@GetMapping("/delete")
+	public String remove(HttpSession session, RedirectAttributes ra) {
+		String sessionId = (String) session.getAttribute("sessionId");
+		Map<String, String> map = new HashMap<>();	
+		map.put("sessionId", sessionId);
+		int cnt = service.remove(map);
+		System.out.println("cnt = " + cnt);
+		if(cnt!=1) {
+			// 회원삭제 실패시 
+			ra.addFlashAttribute("result", "removeFail");
+		}else {
+			// 회원삭제 성공시
+			ra.addFlashAttribute("result", "removeSuccess");
+			session.invalidate();
+		}
+		return "redirect:/";
+		
 	}
 }

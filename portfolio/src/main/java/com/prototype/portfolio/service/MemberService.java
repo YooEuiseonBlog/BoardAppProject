@@ -11,4 +11,6 @@ public interface MemberService {
 	public Optional<MemberVo> makeAnInquiry(MemberVo memeber);
 	public List<MemberVo> inquireAll();
 	public MemberVo inquireOne(Map<String, Object> map);
+	public int edit(MemberVo member);
+	public int remove(Map<String, String> map);
 }
