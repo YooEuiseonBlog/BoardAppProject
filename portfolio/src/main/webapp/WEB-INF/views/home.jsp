@@ -9,13 +9,15 @@
 <title>Welcome Page</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
+	
 	$(function(){
 		var result = '${result}';
+		var processName = '${processName}';
 		
-		if(result === 'removeFail') {
-			alert("회원 삭제 실패했습니다.");
-		}else if(result === 'removeSuccess'){
-			alert("회원 삭제가 성공하였습니다.");
+		if(result === 'fail') {
+			alert(processName+" 실패를 하였습니다.");
+		}else if(result === 'success') {
+			alert(processName+" 성공을 하였습니다.");
 		}
 		
 		$('#login-btn').on("click", function(){

@@ -9,6 +9,15 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	$(function(){
+		var result = '${result}';
+		var processName = '${processName}';
+		
+		if(result === 'fail') {
+			alert(processName+" 실패를 하였습니다.");
+		}else if(result === 'success') {
+			alert(processName+" 성공을 하였습니다.");
+		}
+		
 		$("#joinBtn").on("click", function(){
 			location.href="/join"
 		});
