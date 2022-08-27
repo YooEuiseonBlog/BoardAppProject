@@ -5,18 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Properties;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Delete;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.prototype.portfolio.service.MemberService;
@@ -74,18 +69,18 @@ public class MemberController {
 		System.out.println("join-Member-info : " + member);
 		try {		
 			int result = service.join(member);
-			ra.addAttribute("processName", "회원가입");
+			addFlashProcessName(ra, "회원가입");
 			if(result!=1) {
 				throw new Exception("Join fail_ 회원가입 오류");
 			}
 		} catch (Exception e) {
 			System.out.println("join fail");
-			ra.addAttribute("result", "fail");
+			addFlashResult(ra, false);
 			return "redirect:/join";
 		}
 		
 		System.out.println("------------------- Join success -------------------");
-		ra.addAttribute("result", "success");
+		addFlashResult(ra, true);
 		return "redirect:/login";
 	}
 	

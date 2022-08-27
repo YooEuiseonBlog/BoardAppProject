@@ -37,7 +37,7 @@
 		});
 		
 		$('#list-btn').on("click", function(){
-			location.href="/board/list";
+			location.href="/board/list/1";
 		});
 	})
 </script>
